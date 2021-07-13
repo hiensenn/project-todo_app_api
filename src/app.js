@@ -3,11 +3,17 @@ const app = express()
 const port = 3020
 const usuarios = require('./controllers/usuario-controller');
 const tarefas = require('./controllers/tarefa-controller');
+const bodyParser = require('body-parser');
 
 
+const User = require('./models/userModel')
+const Task = require('./models/task')
+const db = require('./infra/bd')
 
-usuarios(app);
-tarefas(app);
+
+app.use(bodyParser.json());
+usuarios(app, User, db);
+tarefas(app, Task , db);
 
 
 
